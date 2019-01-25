@@ -8,8 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ec7bfe47-a530-400d-aaf1-c81fac6d1269" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vijay/saurabh/getconnect/CircleTestActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vijay/saurabh/getconnect/CircleTestActivity.java" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_circle_test.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_circle_test.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -92,12 +90,25 @@
       <file leaf-file-name="CircleTestActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vijay/saurabh/getconnect/CircleTestActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="45" column="33" lean-forward="true" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
+            <state relative-caret-position="142">
+              <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2308#2330#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="card_layout.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/card_layout.xml">
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -2323,8 +2334,8 @@
       <recent name="com.vijay.saurabh.getconnect" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Saurabh\AndroidStudioProjects\Hack36\GetConnect\app\src\main\res" />
       <recent name="C:\Users\Saurabh\AndroidStudioProjects\Hack36\GetConnect\app\src\main\res\layout" />
+      <recent name="C:\Users\Saurabh\AndroidStudioProjects\Hack36\GetConnect\app\src\main\res" />
       <recent name="C:\Users\Saurabh\AndroidStudioProjects\Hack36\GetConnect\app\src\main\res\drawable" />
       <recent name="C:\Users\Saurabh\AndroidStudioProjects\Hack36\GetConnect\app" />
     </key>
@@ -2567,7 +2578,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548457353577</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="CircleTestActivity done">
+      <created>1548457955231</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1548457955231</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2618,7 +2636,8 @@
     <MESSAGE value="Map Activity Corrected" />
     <MESSAGE value="Location Shared" />
     <MESSAGE value="Circle of Official Created" />
-    <option name="LAST_COMMIT_MESSAGE" value="Circle of Official Created" />
+    <MESSAGE value="CircleTestActivity done" />
+    <option name="LAST_COMMIT_MESSAGE" value="CircleTestActivity done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2986,10 +3005,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/card_layout.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vijay/saurabh/getconnect/CircleTestActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="45" column="33" lean-forward="true" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
+        <state relative-caret-position="142">
+          <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2308#2330#0" expanded="true" />

@@ -64,8 +64,8 @@
       <file leaf-file-name="MyNavigationActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vijay/saurabh/getconnect/MyNavigationActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="236" column="12" lean-forward="false" selection-start-line="236" selection-start-column="12" selection-end-line="236" selection-end-column="12" />
+            <state relative-caret-position="455">
+              <caret line="239" column="64" lean-forward="false" selection-start-line="239" selection-start-column="64" selection-end-line="239" selection-end-column="64" />
               <folding>
                 <element signature="e#3489#3520#0" expanded="true" />
                 <element signature="e#3522#3554#0" expanded="true" />
@@ -2580,7 +2580,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548456741104</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Map Activity Corrected">
+      <created>1548457045169</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1548457045169</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2628,7 +2635,8 @@
     <MESSAGE value="Login and Register done" />
     <MESSAGE value="Code Generation Done" />
     <MESSAGE value="Navigation Activity Created" />
-    <option name="LAST_COMMIT_MESSAGE" value="Navigation Activity Created" />
+    <MESSAGE value="Map Activity Corrected" />
+    <option name="LAST_COMMIT_MESSAGE" value="Map Activity Corrected" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -2971,8 +2979,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vijay/saurabh/getconnect/MyNavigationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="236" column="12" lean-forward="false" selection-start-line="236" selection-start-column="12" selection-end-line="236" selection-end-column="12" />
+        <state relative-caret-position="455">
+          <caret line="239" column="64" lean-forward="false" selection-start-line="239" selection-start-column="64" selection-end-line="239" selection-end-column="64" />
           <folding>
             <element signature="e#3489#3520#0" expanded="true" />
             <element signature="e#3522#3554#0" expanded="true" />

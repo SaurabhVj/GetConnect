@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.vijay.saurabh.getconnect"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -25,5 +25,23 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    //firebase dependencies
+    implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.firebaseui:firebase-ui:0.4.3'
+    implementation 'com.firebaseui:firebase-ui-database:0.5.3'
+    implementation 'com.google.firebase:firebase-auth:16.0.2'
+    implementation 'com.google.firebase:firebase-storage:16.0.1'
+    implementation 'com.google.firebase:firebase-firestore:17.1.0'
+    implementation 'com.google.firebase:firebase-messaging:17.3.0'
+    implementation 'com.firebase:firebase-client-android:2.5.2'
+
+    //Google Map Api
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.google.maps:google-maps-services:0.2.5'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
+    implementation 'com.google.maps.android:android-maps-utils:0.5+'
+    implementation 'com.google.android.gms:play-services-places:15.0.1'
 }
 apply plugin: 'com.google.gms.google-services'

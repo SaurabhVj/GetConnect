@@ -22,7 +22,8 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".Register" />
         <activity android:name=".PasswordActivity" />
-        <activity android:name=".NameActivity"></activity>
+        <activity android:name=".NameActivity" />
+        <activity android:name=".InviteCodeActivity"></activity>
     </application>
 
 </manifest>

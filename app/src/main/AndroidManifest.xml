@@ -36,7 +36,8 @@
         <activity android:name=".LoginRegister.PasswordActivity" />
         <activity android:name=".LoginRegister.NameActivity" />
         <activity android:name=".LoginRegister.InviteCodeActivity" />
-        <activity android:name=".OfficialCircle.CircleTestActivity"></activity>
+        <activity android:name=".OfficialCircle.CircleTestActivity" />
+        <activity android:name=".Places"></activity>
     </application>
 
 </manifest>

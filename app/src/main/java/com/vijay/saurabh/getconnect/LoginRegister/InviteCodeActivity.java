@@ -21,11 +21,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.vijay.saurabh.getconnect.OfficialCircle.CreateUsers;
 import com.vijay.saurabh.getconnect.MyNavigationActivity;
+import com.vijay.saurabh.getconnect.OfficialCircle.CreateUsers;
 import com.vijay.saurabh.getconnect.R;
+
+import java.net.URI;
 
 public class InviteCodeActivity extends AppCompatActivity {
     TextView tv ;
@@ -59,6 +62,7 @@ public class InviteCodeActivity extends AppCompatActivity {
             isSharing = i.getStringExtra("isSharing");
             date = i.getStringExtra("date");
             imageuri = i.getParcelableExtra("imageuri");
+            //Toast.makeText(this, imageuri.toString(), Toast.LENGTH_SHORT).show();
         }
         tv.setText(code);
 

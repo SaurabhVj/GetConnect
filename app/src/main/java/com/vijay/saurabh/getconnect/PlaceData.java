@@ -1,4 +1,4 @@
-package com.thispc.let_the_vip_down.Mapping;
+package com.vijay.saurabh.getconnect;
 
 public class PlaceData {
     String name,lat,lang;

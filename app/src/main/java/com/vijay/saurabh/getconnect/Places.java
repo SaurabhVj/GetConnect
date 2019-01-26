@@ -39,10 +39,10 @@ public class Places extends AppCompatActivity {
         rv.setLayoutManager(llm);
         Query qref = mref.orderByChild("name");
 
-        FirebaseRecyclerAdapter<com.thispc.let_the_vip_down.Mapping.PlaceData,MyHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<com.thispc.let_the_vip_down.Mapping.PlaceData, MyHolder>
-                (com.thispc.let_the_vip_down.Mapping.PlaceData.class,R.layout.place_item,MyHolder.class,qref) {
+        FirebaseRecyclerAdapter<PlaceData,MyHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<PlaceData, MyHolder>
+                (PlaceData.class,R.layout.place_item,MyHolder.class,qref) {
             @Override
-            protected void populateViewHolder(MyHolder viewHolder, com.thispc.let_the_vip_down.Mapping.PlaceData model, final int position) {
+            protected void populateViewHolder(MyHolder viewHolder, PlaceData model, final int position) {
                 final String name = model.getName();
                 final double lat = Double.parseDouble(model.getLat());
                 final double lang = Double.parseDouble(model.getLang());

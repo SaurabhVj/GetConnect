@@ -33,6 +33,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -56,7 +57,7 @@ public class MyNavigationActivity extends AppCompatActivity
     GoogleMap mMap;
     GoogleApiClient client;
     LocationRequest request;
-    LatLng latLng;
+    LatLng latLng,latLngplace;
     Marker marker;
     MarkerOptions options;
     LocationManager locationManager;
@@ -65,6 +66,8 @@ public class MyNavigationActivity extends AppCompatActivity
     String current_username, current_useremail, current_imageurl;
     TextView tv_currentname, tv_currentcode;
     ImageView img;
+    Double lat,lang;
+    String place;
     int count = 0;
 
     @Override
@@ -95,6 +98,12 @@ public class MyNavigationActivity extends AppCompatActivity
         tv_currentname = header.findViewById(R.id.tv_name);
         tv_currentcode = header.findViewById(R.id.tv_code);
         img = header.findViewById(R.id.header_img);
+        lat = getIntent().getDoubleExtra("lat",0);
+        lang = getIntent().getDoubleExtra("lang",0);
+        place = getIntent().getStringExtra("place");
+        latLngplace = null;
+        if(lat!=0 && lang!=0)
+            latLngplace = new LatLng(lat,lang);
 
         firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
@@ -195,6 +204,13 @@ public class MyNavigationActivity extends AppCompatActivity
             }
         });
 
+        if(latLngplace!=null)
+        {
+            mMap.addMarker(new MarkerOptions().position(latLngplace).title(place).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+            //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngplace, 17));
+        }
+
     }
 
     @Override
@@ -252,6 +268,11 @@ public class MyNavigationActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+        }else if(id == R.id.places)
+        {
+            Intent i = new Intent(MyNavigationActivity.this,Places.class);
+            startActivity(i);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -315,4 +336,5 @@ public class MyNavigationActivity extends AppCompatActivity
         }
 
     }
+
 }

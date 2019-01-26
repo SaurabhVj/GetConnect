@@ -57,11 +57,13 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent i = new Intent(MainActivity.this , LoginActivity.class);
         startActivity(i);
+        finish();
     }
     public void gotoregister(View v)
     {
         Intent i = new Intent(MainActivity.this , Register.class);
         startActivity(i);
+        finish();
     }
 
 }

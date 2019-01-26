@@ -1,4 +1,4 @@
-package com.vijay.saurabh.getconnect;
+package com.vijay.saurabh.getconnect.NearbyPlaces;
 
 public class PlaceData {
     String name,lat,lang;

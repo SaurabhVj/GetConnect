@@ -35,9 +35,10 @@
 
         <activity android:name=".LoginRegister.PasswordActivity" />
         <activity android:name=".LoginRegister.NameActivity" />
+        <service android:name=".Geofencing.GeofenceReceiver"></service>
         <activity android:name=".LoginRegister.InviteCodeActivity" />
         <activity android:name=".OfficialCircle.CircleTestActivity" />
-        <activity android:name=".Places"></activity>
+        <activity android:name=".NearbyPlaces.Places"></activity>
     </application>
 
 </manifest>

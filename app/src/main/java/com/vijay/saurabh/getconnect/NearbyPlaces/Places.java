@@ -1,4 +1,4 @@
-package com.vijay.saurabh.getconnect;
+package com.vijay.saurabh.getconnect.NearbyPlaces;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -15,8 +15,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-
-import java.util.ArrayList;
+import com.vijay.saurabh.getconnect.MyNavigationActivity;
+import com.vijay.saurabh.getconnect.R;
 
 public class Places extends AppCompatActivity {
     DatabaseReference mref;
@@ -78,4 +78,9 @@ public class Places extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(Places.this,MyNavigationActivity.class));
+        finish();
+    }
 }

@@ -4,45 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/mountains1"
     tools:context=".LoginRegister.NameActivity">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E6FFFFFF"
+        />
+
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:src="@drawable/tom"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:padding="20dp"
+        android:src="@drawable/breakbed"
         android:id="@+id/profile_pic"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:onClick="selectImage"
-        android:layout_marginTop="26dp" />
-
-    <EditText
-        android:id="@+id/et_name3"
-        android:layout_width="359dp"
+        />
+    <LinearLayout
+        android:id="@+id/linlay1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="186dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:hint="Enter Your NAme"
-        android:gravity="center"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="13dp" />
+        android:layout_below="@+id/profile_pic"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="214dp"
-        android:layout_marginStart="135dp"
-        android:text="Next"
-        android:onClick="generatecode"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="135dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingRight="30dp"
+            android:paddingLeft="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="Full Name"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:inputType="number"
+                android:textColor="#FF6347"
+                android:textSize="24sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:id="@+id/et_emailupdate"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+        <Button
+            android:layout_marginTop="30dp"
+            android:layout_width="250dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="65dp"
+            android:text="Update Profile"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="15dp"
+            android:onClick="generatecode"
+            android:background="@drawable/selector_xml_name"
+            android:id="@+id/btn_updateprofile"/>
+
+    </LinearLayout>
+
+
+
+
+
 
 
 </RelativeLayout>

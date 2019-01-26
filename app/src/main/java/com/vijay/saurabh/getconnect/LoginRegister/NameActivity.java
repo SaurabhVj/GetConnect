@@ -33,10 +33,12 @@ public class NameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_name);
         Intent intent = getIntent();
-        email = intent.getStringExtra("email");
-        password = intent.getStringExtra("password");
-        et_name = findViewById(R.id.et_name3);
-        btn_name = findViewById(R.id.btn_name) ;
+        if(intent != null) {
+            email = intent.getStringExtra("email");
+            password = intent.getStringExtra("password");
+        }
+        et_name = findViewById(R.id.et_emailupdate);
+        btn_name = findViewById(R.id.btn_updateprofile) ;
         pp = findViewById(R.id.profile_pic);
 
     }

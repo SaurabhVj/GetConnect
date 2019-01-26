@@ -33,7 +33,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".LoginRegister.PasswordActivity" />
         <activity android:name=".LoginRegister.NameActivity" />
         <service android:name=".Geofencing.GeofenceReceiver"></service>
         <activity android:name=".LoginRegister.InviteCodeActivity" />

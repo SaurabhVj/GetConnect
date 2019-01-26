@@ -7,6 +7,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MyNavigationActivity"
     tools:showIn="@layout/app_bar_my_navigation">
+
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -14,5 +15,57 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MyNavigationActivity" />
+        tools:context=".MyNavigationActivity" >
+
+    </fragment>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorBackgroundFloating"
+        android:layout_margin="8dp">
+
+        <fragment
+            android:id="@+id/autocomplete_fragment"
+            android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/editMarker" />
+    </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/path"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="246dp"
+        android:layout_marginLeft="246dp"
+        android:layout_marginTop="572dp"
+        android:layout_marginEnd="109dp"
+        android:layout_marginRight="109dp"
+        android:layout_marginBottom="47dp"
+        android:clickable="true"
+        app:srcCompat="@android:color/holo_purple" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="239dp"
+        android:layout_marginLeft="239dp"
+        android:layout_marginTop="350dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginRight="116dp"
+        android:layout_marginBottom="269dp"
+        android:clickable="true"
+        app:srcCompat="@android:color/holo_blue_dark" />
 </RelativeLayout>

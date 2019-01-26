@@ -50,6 +50,8 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -60,22 +62,28 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.vijay.saurabh.getconnect.Geofencing.SimpleGeofence;
 import com.vijay.saurabh.getconnect.Geofencing.SimpleGeofenceStore;
+import com.vijay.saurabh.getconnect.NearbyPlaces.Places;
 import com.vijay.saurabh.getconnect.OfficialCircle.CircleTestActivity;
+import com.vijay.saurabh.getconnect.directionhelpers.FetchURL;
+import com.vijay.saurabh.getconnect.directionhelpers.PointsParser;
+import com.vijay.saurabh.getconnect.directionhelpers.TaskLoadedCallback;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MyNavigationActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener,GoogleMap.OnMapClickListener,GoogleMap.OnMarkerClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback,TaskLoadedCallback,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener,GoogleMap.OnMapClickListener {
     FirebaseAuth auth;
     GoogleMap mMap;
     GoogleApiClient client;
     LocationRequest request;
     LatLng latLng,latLngplace;
-    Marker marker;
+    private Polyline currentPolyline;
     MarkerOptions options;
     LocationManager locationManager;
     FirebaseUser user;
@@ -86,6 +94,8 @@ public class MyNavigationActivity extends AppCompatActivity
     FloatingActionButton currentLocation,showPath;
     Double lat,lang;
     String place;
+    private MarkerOptions place1, place2;
+    ArrayList markerPoints = new ArrayList();
     int count = 0;
     private GeofencingClient mGeofencingClient;
     private Animation animShow;
@@ -190,20 +200,6 @@ public class MyNavigationActivity extends AppCompatActivity
             }
         });
 
-        currentLocation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO:
-                //Current location
-            }
-        });
-        showPath.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO:
-                //show path
-            }
-        });
 
     }
     private void showAddConfirmationDialog(final LatLng coordinates, final String name, final String addressOfLocation) {
@@ -222,7 +218,7 @@ public class MyNavigationActivity extends AppCompatActivity
         builder.setPositiveButton("Add Marker", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked the "Delete" button, so delete the pet.
-                AddMArkerToLocation(coordinates,name,addressOfLocation);
+                addPath(coordinates);
 
             }
         });
@@ -244,22 +240,6 @@ public class MyNavigationActivity extends AppCompatActivity
 
 
 
-    }
-    private void AddMArkerToLocation(LatLng coordinates, String name, String addressOfLocation) {
-
-        Marker markerInserted = /*ListOfMarkers.add(*/mMap.addMarker(new MarkerOptions().position(coordinates).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));//);
-
-        Double lat = coordinates.latitude;
-        Double longi = coordinates.longitude;
-
-        String latitude = lat.toString();
-        String longitude = longi.toString();
-        markerMapAddresses.clear();
-        markerMap.clear();
-        markerMapAddresses.put(markerInserted, addressOfLocation);
-        mMap.setOnMarkerClickListener(this);
-        //startEditActivity();
-        mMap.animateCamera(CameraUpdateFactory.newLatLng(coordinates));
     }
 
 
@@ -298,7 +278,7 @@ public class MyNavigationActivity extends AppCompatActivity
             return;
         }
         mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
         locationManager.requestLocationUpdates("network", 1, 1, new android.location.LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
@@ -317,15 +297,42 @@ public class MyNavigationActivity extends AppCompatActivity
                     //Toast.makeText(MyNavigationActivity.this, address, Toast.LENGTH_LONG).show();
                     mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                     options = new MarkerOptions().position(latLng).title("Me");
-                    marker = mMap.addMarker(options);
+                    mMap.addMarker(options);
+                    addPath(latLng);
                     //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                    if(client.isConnected())
-                        marker.remove();
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                    @Override
+                    public void onMapClick(LatLng latLng) {
+                        addPath(latLng);
+                    }
+                });
+                currentLocation.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getCurrentLocation();
+                    }
+                });
+                showPath.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (markerPoints.size() == 2) {
+                            LatLng origin = (LatLng) markerPoints.get(0);
+                            LatLng dest = (LatLng) markerPoints.get(1);
+                            place1 = new MarkerOptions().position(origin).title("Location 1");
+                            place2 = new MarkerOptions().position(dest).title("Location 2");
+                            new FetchURL(MyNavigationActivity.this).execute(getUrl(place1.getPosition(), place2.getPosition(), "walking"), "walking");
+                            // Getting URL to the Google Directions API
+                            double valueResult = getdistance(origin,dest);
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(origin, 17));
+                            walking();
+                        }
+                    }
+                });
             }
 
             @Override
@@ -348,7 +355,8 @@ public class MyNavigationActivity extends AppCompatActivity
         {
             mMap.addMarker(new MarkerOptions().position(latLngplace).title(place).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngplace, 17));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngplace, 16));
+            addPath(latLngplace);
         }
 
     }
@@ -440,7 +448,8 @@ public class MyNavigationActivity extends AppCompatActivity
     public void onConnected(@Nullable Bundle bundle) {
         request = new LocationRequest().create();
         request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        request.setInterval(3000);
+        request.setInterval(1000);
+        request.setFastestInterval(1000);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             return;
@@ -463,34 +472,20 @@ public class MyNavigationActivity extends AppCompatActivity
 
     @Override
     public void onLocationChanged(Location location) {
-        if(location ==null)
-        {
+        if (location == null) {
             Toast.makeText(this, "Could Not Get Locations", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            if(marker!=null)
-                marker.remove();
-            latLng = new LatLng(location.getLatitude() , location.getLongitude());
-            options = new MarkerOptions().position(latLng);
-            options.position(latLng);
-            options.title("Current Location");
-            marker = mMap.addMarker(options);
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng , 16));
-
+        } else {
+            //latLng = new LatLng(location.getLatitude(), location.getLongitude());
             double lat = location.getLatitude();
             double lang = location.getLongitude();
             user = auth.getCurrentUser();
-            if(user != null) {
+            if (user != null) {
                 //Toast.makeText(this, user.getUid(), Toast.LENGTH_SHORT).show();
                 latlangReference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
                 latlangReference.child("lat").setValue(Double.toString(lat));
                 latlangReference.child("lng").setValue(Double.toString(lang));
             }
-
-
         }
-
     }
 
     @Override
@@ -498,14 +493,149 @@ public class MyNavigationActivity extends AppCompatActivity
 
     }
 
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        marker.remove();
-        markerMap.remove(marker);
-        markerMapAddresses.remove(marker);
+    public void getCurrentLocation() {
 
-
-        return true;
-
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            Location location = LocationServices.FusedLocationApi.getLastLocation(client);
+            if (location == null) {
+                LocationServices.FusedLocationApi.requestLocationUpdates(client, request, (LocationListener) this);
+                markerPoints.clear();
+                mMap.clear();
+                displayGeofences();
+            } else {
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+                latLng = new LatLng(latitude, longitude);
+                markerPoints.clear();
+                mMap.clear();
+                addPath(latLng);
+                displayGeofences();
+            }
+        }
     }
+    public void walking()
+    {
+        final MarkerOptions[] options = {new MarkerOptions().position(latLng).title("ME")};
+        options[0].icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+        final Marker[] marker = {mMap.addMarker(options[0])};
+        mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+            @Override
+            public void onMyLocationChange(Location location) {
+                if (markerPoints.size() >= 2) {
+                    LatLng dest = (LatLng) markerPoints.get(1);
+                    latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    marker[0].remove();
+                    options[0] = new MarkerOptions().position(latLng).title("ME");
+                    options[0].icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+                    marker[0] = mMap.addMarker(options[0]);
+                    double valueResult = getdistance(latLng, dest);
+                    int i;
+                    for(i=0; i< PointsParser.points.size(); i++)
+                    {
+                        double dist = getdistance(latLng,PointsParser.points.get(i));
+                        dist = round(dist,2);
+                        if(latLng.equals(PointsParser.points.get(i)) || dist<=0.06)
+                            break;
+                    }
+                    if(i==PointsParser.points.size() && PointsParser.points.size()>0)
+                    {
+                        addPath(latLng);
+                        addPath(dest);
+                    }
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
+                }
+            }
+        });
+    }
+
+    private String getUrl(LatLng origin, LatLng dest, String directionMode) {
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+        // Mode
+        String mode = "mode=" + directionMode;
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + mode;
+        // Output format
+        String output = "json";
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
+        //Toast.makeText(this, url, Toast.LENGTH_SHORT).show();
+        return url;
+    }
+
+    private void addPath(LatLng latLngcurr) {
+        if(markerPoints.size()==2)
+        {
+            markerPoints.clear();
+            mMap.clear();
+            markerPoints.add(latLng);
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngcurr,15));
+            MarkerOptions options = new MarkerOptions();
+            options.position(latLngcurr).title("ME");
+            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+            mMap.addMarker(options);
+        }
+        if (markerPoints.size() <= 1) {
+            markerPoints.add(latLngcurr);
+            //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngcurr, 15));
+            //txtTime.setText("0 sec");
+            //txtDistance.setText("0 Km");
+            MarkerOptions options = new MarkerOptions();
+            // Setting the position of the marker
+            options.position(latLngcurr);
+            if (markerPoints.size() == 1) {
+                options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+            } else if (markerPoints.size() == 2) {
+                options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+            }
+            if(latLngcurr==latLng)
+                options.title("ME");
+
+            // Add new marker to the Google Map Android API V2
+            mMap.addMarker(options);
+        }
+    }
+    double getdistance(LatLng origin,LatLng dest)
+    {
+        int Radius = 6371;// radius of earth in Km
+        double lat1 = origin.latitude;
+        double lat2 = dest.latitude;
+        double lon1 = origin.longitude;
+        double lon2 = dest.longitude;
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+                + Math.cos(Math.toRadians(lat1))
+                * Math.cos(Math.toRadians(lat2)) * Math.sin(dLon / 2)
+                * Math.sin(dLon / 2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+        double valueResult = Radius * c;
+        double km = valueResult / 1;
+        DecimalFormat newFormat = new DecimalFormat("####");
+        int kmInDec = Integer.valueOf(newFormat.format(km));
+        double meter = valueResult % 1000;
+        int meterInDec = Integer.valueOf(newFormat.format(meter));
+        Log.i("Radius Value", "" + valueResult + "   KM  " + kmInDec
+                + " Meter   " + meterInDec);
+        return valueResult;
+    }
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
+    @Override
+    public void onTaskDone(Object... values) {
+        if (currentPolyline != null)
+            currentPolyline.remove();
+        currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
+    }
+
 }

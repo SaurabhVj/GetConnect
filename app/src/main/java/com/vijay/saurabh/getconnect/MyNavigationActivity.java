@@ -502,6 +502,7 @@ public class MyNavigationActivity extends AppCompatActivity
                 addPath(latLng);
                 displayGeofences();
             }
+            distance.setText("");
         }
     }
     public void walking()

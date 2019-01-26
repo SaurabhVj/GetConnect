@@ -79,6 +79,7 @@ public class MyNavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback,TaskLoadedCallback,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener,GoogleMap.OnMapClickListener {
     FirebaseAuth auth;
+    TextView distance;
     GoogleMap mMap;
     GoogleApiClient client;
     LocationRequest request;
@@ -116,6 +117,7 @@ public class MyNavigationActivity extends AppCompatActivity
         //getSupportActionBar().hide();
         setSupportActionBar(toolbar);
         auth = FirebaseAuth.getInstance();
+        distance = findViewById(R.id.dist);
 
 
 
@@ -361,8 +363,8 @@ public class MyNavigationActivity extends AppCompatActivity
 
             CircleOptions circleOptions1 = new CircleOptions()
                     .center(new LatLng(sg.getLatitude(), sg.getLongitude()))
-                    .radius(sg.getRadius()).strokeColor(Color.BLACK)
-                    .strokeWidth(2).fillColor(0x500000ff);
+                    .radius(sg.getRadius()).strokeColor(Color.WHITE)
+                    .strokeWidth(2).fillColor(0x80FF6347);
             mMap.addCircle(circleOptions1);
         }
 
@@ -383,9 +385,6 @@ public class MyNavigationActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -522,6 +521,7 @@ public class MyNavigationActivity extends AppCompatActivity
                         options[0].icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
                         marker[0] = mMap.addMarker(options[0]);
                         double valueResult = getdistance(latLng, dest);
+                        distance.setText(Double.toString(round(valueResult,2))+" Km");
                         int i;
                         if (PointsParser.points != null) {
                             for (i = 0; i < PointsParser.points.size(); i++) {
@@ -553,6 +553,7 @@ public class MyNavigationActivity extends AppCompatActivity
             new FetchURL(MyNavigationActivity.this).execute(getUrl(place1.getPosition(), place2.getPosition(), "walking"), "walking");
             // Getting URL to the Google Directions API
             double valueResult = getdistance(origin,dest);
+            distance.setText(Double.toString(round(valueResult,2))+" Km");
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(origin, 15));
             walking();
         }
@@ -585,7 +586,7 @@ public class MyNavigationActivity extends AppCompatActivity
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngcurr,15));
             MarkerOptions options = new MarkerOptions();
             options.position(latLng).title("ME");
-            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
             mMap.addMarker(options);
         }
         if (markerPoints.size() <= 1) {
@@ -598,9 +599,11 @@ public class MyNavigationActivity extends AppCompatActivity
             // Setting the position of the marker
             options.position(latLngcurr);
             if (markerPoints.size() == 1) {
-                options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
             } else if (markerPoints.size() == 2) {
-                options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                double valueResult = getdistance(latLng,latLngcurr);
+                distance.setText(Double.toString(round(valueResult,2))+" Km");
             }
             if(latLngcurr==latLng)
                 options.title("ME");

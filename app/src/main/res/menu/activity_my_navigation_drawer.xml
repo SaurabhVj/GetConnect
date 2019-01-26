@@ -9,10 +9,6 @@
             android:id="@+id/places"
             android:title="Places"/>
         <item
-            android:id="@+id/nav_joincircle"
-
-            android:title="Join Circle" />
-        <item
             android:id="@+id/nav_mycircle"
 
             android:title="My Circle" />
@@ -35,11 +31,11 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="Terms $ Conditions" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="Contact us" />
         </menu>
     </item>
 

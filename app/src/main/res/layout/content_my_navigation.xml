@@ -31,41 +31,21 @@
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/editMarker" />
     </LinearLayout>
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/path"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="246dp"
-        android:layout_marginLeft="246dp"
-        android:layout_marginTop="572dp"
-        android:layout_marginEnd="109dp"
-        android:layout_marginRight="109dp"
-        android:layout_marginBottom="47dp"
-        android:clickable="true"
-        app:srcCompat="@android:color/holo_purple" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/current"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@drawable/ic_my_location_black_24dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="239dp"
-        android:layout_marginLeft="239dp"
-        android:layout_marginTop="350dp"
-        android:layout_marginEnd="116dp"
-        android:layout_marginRight="116dp"
-        android:layout_marginBottom="269dp"
-        android:clickable="true"
-        app:srcCompat="@android:color/holo_blue_dark" />
+        android:id="@+id/path"
+        app:srcCompat="@drawable/ic_directions_black_24dp"
+        />
 </RelativeLayout>

@@ -25,18 +25,18 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".Register" />
+        <activity android:name=".LoginRegister.LoginActivity" />
+        <activity android:name=".LoginRegister.Register" />
         <activity android:name=".MyNavigationActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".PasswordActivity" />
-        <activity android:name=".NameActivity" />
-        <activity android:name=".InviteCodeActivity" />
-        <activity android:name=".CircleTestActivity"></activity>
+        <activity android:name=".LoginRegister.PasswordActivity" />
+        <activity android:name=".LoginRegister.NameActivity" />
+        <activity android:name=".LoginRegister.InviteCodeActivity" />
+        <activity android:name=".OfficialCircle.CircleTestActivity"></activity>
     </application>
 
 </manifest>

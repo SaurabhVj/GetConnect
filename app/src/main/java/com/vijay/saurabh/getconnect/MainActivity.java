@@ -10,7 +10,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.karan.churi.PermissionManager.PermissionManager;
-import com.vijay.saurabh.getconnect.R;
+import com.vijay.saurabh.getconnect.LoginRegister.LoginActivity;
+import com.vijay.saurabh.getconnect.LoginRegister.Register;
 
 import java.util.ArrayList;
 

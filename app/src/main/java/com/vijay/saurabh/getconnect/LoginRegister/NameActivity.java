@@ -1,4 +1,4 @@
-package com.vijay.saurabh.getconnect;
+package com.vijay.saurabh.getconnect.LoginRegister;
 
 import android.content.Intent;
 import android.net.Uri;

@@ -44,6 +44,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.vijay.saurabh.getconnect.OfficialCircle.CircleTestActivity;
 
 import java.io.IOException;
 import java.util.List;
@@ -199,7 +200,7 @@ public class MyNavigationActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.my_navigation, menu);
+        getMenuInflater().inflate(R.menu.display2, menu);
         return true;
     }
 
@@ -211,7 +212,7 @@ public class MyNavigationActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
             return true;
         }
 

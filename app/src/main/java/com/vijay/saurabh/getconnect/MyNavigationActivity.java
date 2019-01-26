@@ -218,7 +218,7 @@ public class MyNavigationActivity extends AppCompatActivity
         builder.setPositiveButton("Add Marker", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked the "Delete" button, so delete the pet.
-                AddMArkerToLocation(coordinates,name,addressOfLocation);
+                addPath(coordinates);
 
             }
         });
@@ -240,21 +240,6 @@ public class MyNavigationActivity extends AppCompatActivity
 
 
 
-    }
-    private void AddMArkerToLocation(LatLng coordinates, String name, String addressOfLocation) {
-
-        Marker markerInserted = /*ListOfMarkers.add(*/mMap.addMarker(new MarkerOptions().position(coordinates).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));//);
-
-        Double lat = coordinates.latitude;
-        Double longi = coordinates.longitude;
-
-        String latitude = lat.toString();
-        String longitude = longi.toString();
-        markerMapAddresses.clear();
-        markerMap.clear();
-        markerMapAddresses.put(markerInserted, addressOfLocation);
-        //startEditActivity();
-        mMap.animateCamera(CameraUpdateFactory.newLatLng(coordinates));
     }
 
 

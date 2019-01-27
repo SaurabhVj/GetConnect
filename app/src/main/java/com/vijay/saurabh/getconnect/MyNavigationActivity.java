@@ -351,7 +351,7 @@ public class MyNavigationActivity extends AppCompatActivity
 
         if(latLngplace!=null)
         {
-            mMap.addMarker(new MarkerOptions().position(latLngplace).title(place).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+            mMap.addMarker(new MarkerOptions().position(latLngplace).title(place).icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.milobaba)));
             //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngplace, 16));
             addPath(latLngplace);
@@ -523,7 +523,7 @@ public class MyNavigationActivity extends AppCompatActivity
     {
         if(latLng!=null) {
             final MarkerOptions[] options = {new MarkerOptions().position(latLng).title("ME")};
-            options[0].icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+            options[0].icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.milobaba));
             final Marker[] marker = {mMap.addMarker(options[0])};
             mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
                 @Override
@@ -533,7 +533,7 @@ public class MyNavigationActivity extends AppCompatActivity
                         latLng = new LatLng(location.getLatitude(), location.getLongitude());
                         marker[0].remove();
                         options[0] = new MarkerOptions().position(latLng).title("ME");
-                        options[0].icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+                        options[0].icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.milobaba));
                         marker[0] = mMap.addMarker(options[0]);
                         double valueResult = getdistance(latLng, dest);
                         distance.setText(Double.toString(round(valueResult,2))+" Km");
@@ -601,7 +601,7 @@ public class MyNavigationActivity extends AppCompatActivity
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngcurr,15));
             MarkerOptions options = new MarkerOptions();
             options.position(latLng).title("ME");
-            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+            options.icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.milobaba));
             mMap.addMarker(options);
         }
         if (markerPoints.size() <= 1) {
@@ -614,9 +614,9 @@ public class MyNavigationActivity extends AppCompatActivity
             // Setting the position of the marker
             options.position(latLngcurr);
             if (markerPoints.size() == 1) {
-                options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                options.icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.milobaba));
             } else if (markerPoints.size() == 2) {
-                options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                options.icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.milobaba));
                 double valueResult = getdistance(latLng,latLngcurr);
                 distance.setText(Double.toString(round(valueResult,2))+" Km");
             }

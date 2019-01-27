@@ -15,7 +15,8 @@
         android:layout_marginStart="81dp"
         android:layout_marginTop="91dp"
         android:text="XXXXXX"
-        android:textSize="24sp"
+        android:textColor="@color/colorAccent"
+        android:textSize="28sp"
         android:gravity="center"
         android:textStyle="bold"
         android:layout_alignParentLeft="true"
@@ -28,20 +29,25 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="225dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="24dp"
+        android:textStyle="bold"
         android:text="Save THis Code To create circle with your Friends"
         android:gravity="center_horizontal"
         />
 
     <Button
         android:id="@+id/btn_next1"
-        android:layout_width="183dp"
+        android:layout_width="225dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="217dp"
         android:text="NEXT"
         android:onClick="registeruser"
-
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="50dp"
+        android:textSize="26dp"
+        android:background="@drawable/selector_xml_name"
+        android:textColor="#F2FFFFFF"
         />
 
 
